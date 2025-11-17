@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>newsletter Sub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main id="main">
+        <section class="left">
+            
+                <h1>Stay updated!</h1>
+                <p id="tp">join 60.000+ product managers receiving monthly updates on:</p>
+            
+            <div class="list">
+                <p><img src="images/icon-list.svg" alt="">Product discovery</p>
+                <p><img src="images/icon-list.svg" alt="">Measuring to ensure updates are a success</p>
+                <p><img src="images/icon-list.svg" alt="">And much more!</p>
+            </div>
+            
+            <div class="in_em">
+                <div id="em_p">
+                    <p>Email address</p>
+                    <p id="valid" style="color: red;"></p>
+                </div>
+                <form id="emailform">
+                    <input type="email" name="email" id="email" placeholder="email@company.com"><br>
+                    <button type="submit">subscribe to monthly newsletter</button>
+                </form>
+            </div>
+        </section>
+        <section class="right">
+            <picture>
+                <source media="(min-width: 769px)" srcset="images/illustration-sign-up-desktop.svg">
+
+                <source media="(max-width: 768px)" srcset="images/illustration-sign-up-mobile.svg">
+
+                <img src="images/illustration-sign-up-mobile.svg" alt="">
+            </picture>
+        </section>
+    </main>
+    <div id="thx">
+        <img src="images/icon-success.svg" alt="" id="suc_img">
+        <h1>Thanks for subscribing</h1>
+        <p id="msg">.</p>
+        <button id="close" onclick="exitthx()">Dismiss message</button>
+    </div>
+
+    <script>
+        const email = document.querySelector('#email')
+        const resultmessage = document.querySelector('#valid')
+        const emailform = document.querySelector('#emailform')
+        const msgthx = document.getElementById('msg')
+        const thx = document.getElementById('thx')
+
+        emailform.addEventListener('submit', function(event){
+            event.preventDefault();
+            const isvalid = validateemail(email.value)
+            if(!isvalid){
+                resultmessage.textContent = "Valid email required"
+                resultmessage.style.color = 'red'
+            }else{
+                resultmessage.textContent = ''
+                msgthx.innerHTML = `A confirmation email has been sent to ${email.value} Please open it and click the button inside to confirm your subscription`
+                thx.style.display = 'flex'
+                document.getElementById('main').style.display = 'none'
+            }
+        })
+
+        function exitthx(){
+            thx.style.display = 'none'
+            document.getElementById('main').style.display = 'flex'
+        }
+
+        const validateemail = (email) => {
+            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+            return regex.test(email)
+        }
+
+    </script>
+</body>
+</html>
